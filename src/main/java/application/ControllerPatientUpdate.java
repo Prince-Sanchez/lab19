@@ -76,11 +76,6 @@ public class ControllerPatientUpdate {
 
 		try (Connection con = getConnection();){
 			PreparedStatement ps = con.prepareStatement("update patient set street=?, city=?,state=?, zipcode=?, primaryName=?");
-			ps.setString(1,p.getStreet());
-			ps.setString(2, p.getCity());
-			ps.setString(3,p.getState());
-			ps.setString(4,p.getZipcode());
-
 
 			PreparedStatement ps2 = con.prepareStatement("select id from doctor where last_name =?");// VALIDATE DOC FROM LAST NAME
 			ps2.setString(1, p.getPrimaryName());
@@ -92,19 +87,25 @@ public class ControllerPatientUpdate {
 				model.addAttribute("message", "Doctor not found."); // error message if no doctor ID found
 				model.addAttribute("patient", p);
 				return "patient_edit"; // returns to edit
-			}
+			}// End of validation
 
 
+			ps.setString(1,p.getStreet());
+			ps.setString(2, p.getCity());
+			ps.setString(3,p.getState());
+			ps.setString(4,p.getZipcode());
 			ps.setString(5, p.getPrimaryName());
 
-			int rc = ps.executeUpdate();
+			//int rc = ps.executeUpdate();
+			int rc;
 
-			if(rc ==1){
+			if((rc = ps.executeUpdate()) ==3){
 				model.addAttribute("message", "Update Successful");
 				model.addAttribute("patient", p);
 				return "patient_show";
 			} else{
 				model.addAttribute("message", "Error. Update was not successful");
+				System.out.println(rc);
 				model.addAttribute("patient", p);
 				return "patient_edit";
 			}
