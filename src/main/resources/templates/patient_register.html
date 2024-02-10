@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link href="/display.css" rel="stylesheet">
+</head>
+<body>
+	<form action="/patient/new" th:object="${patient}" method="POST">
+		<h1>Register as new user</h1>
+		<p>
+			<span th:text="${message}"></span>
+		</p>
+		<section>
+			<p>
+				<label for="ssn"> <span>Your SSN: </span>
+				</label> <input type="text" id="ssn" th:field="*{ssn}" />
+			</p>
+			<p>
+				<label for="first_name"> <span>Your First Name: </span>
+				</label> <input type="text" id="first_name" th:field="*{first_name}" />
+			</p>
+			<p>
+				<label for="last_name"> <span>Your Last Name: </span>
+				</label> <input type="text" id="last_name" th:field="*{last_name}" />
+			</p>
+			<p>
+				<label for="birthdate"> <span>Birth Date: </span>
+				</label> <input type="date" id="birthdate" th:field="*{birthdate}" />
+			</p>
+			<p>
+				<label for="street"> <span>Street: </span>
+				</label> <input type="text" id="street" th:field="*{street}" />
+			</p>
+			<p>
+				<label for="city"> <span>City: </span>
+				</label> <input type="text" id="city" th:field="*{city}" />
+			</p>
+			<p>
+				<label for="state"> <span>State: </span>
+				</label> <input type="text" id="state" th:field="*{state}" />
+			</p>
+			<p>
+				<label for="zip"> <span>Zipcode: </span>
+				</label> <input type="text" id="zipcode" th:field="*{zipcode}" />
+			</p>
+			<p>
+				<label for="primaryName"> <span>Primary Physician
+						Name: </span>
+				</label> <input type="text" id="primaryName" th:field="*{primaryName}" />
+			</p>
+		</section>
+		<p>
+			<button type="submit">Register</button>
+		</p>
+	</form>
+</body>
+</html>

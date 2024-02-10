@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link href="/display.css" rel="stylesheet">
+</head>
+<body>
+
+	<h1>DrugStore Data System</h1>
+			<p> 
+			     <span th:text="${message}"/>
+			</p>
+
+	<p>Click on a choice below.</p>
+
+	<section>
+		<p>
+			<a href="/prescription/new">Write a new prescription (for Doctors
+				only)</a>
+		</p>
+
+		<p>
+			<a href="/prescription/fill">Request a prescription be filled
+				(for Patients only)</a>
+		</p>
+
+		<p>
+			<a href="/patient/new">Register as a new patient. (for Patients
+				only)</a>
+		</p>
+
+		<p>
+			<a href="/patient/edit">Display patient data.</a>
+		</p>
+		
+		<p>
+			<a href="/doctor/register">Register as new doctor. (for Doctors only)</a>
+		</p>
+		
+		<p>
+			<a href="/doctor/get">Display doctor profile.</a>
+		</p>
+
+	</section>
+</body>
+</html>

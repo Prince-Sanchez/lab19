@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link href="/display.css" rel="stylesheet">
+</head>
+<body>
+	<form action="/prescription" th:object="${prescription}" method="POST">
+		<h1>New Prescription Form</h1>
+		<p>
+			<span th:text="${message}"></span>
+		</p>
+		<section>
+			<p>
+				<label for="doctor_ssn"> <span>Doctor ID: </span>
+				</label> <input type="text" id="doctor_idn" th:field="*{doctor_id}" />
+			</p>
+			<p>
+				<label for="doctorFirstName"> <span>Doctor First Name: </span>
+				</label> <input type="text" id="doctorName" th:field="*{doctorFirstName}" />
+			</p>
+			<p>
+				<label for="doctorLastName"> <span>Doctor Last Name: </span>
+				</label> <input type="text" id="doctorName" th:field="*{doctorLastName}" />
+			</p>
+			<p>
+				<label for="patient_ssn"> <span>Patient ID: </span>
+				</label> <input type="text" id="patient_id" th:field="*{patient_id}" />
+			</p>
+			<p>
+				<label for="patientFirstName"> <span>Patient First Name: </span>
+				</label> <input type="text" id="patientFirstName" th:field="*{patientFirstName}" />
+			</p>
+			<p>
+				<label for="patientLastName"> <span>Patient Last Name: </span>
+				</label> <input type="text" id="patientLastName" th:field="*{patientLastName}" />
+			</p>
+			<p>
+				<label for="drugName"> <span>Drug Name: </span>
+				</label> <input type="text" id="drugName" th:field="*{drugName}" />
+			</p>
+			<p>
+				<label for="quantity"> <span>Quantity: </span>
+				</label> <input type="number" id="quantity" th:field="*{quantity}" />
+			</p>
+			<p>
+				<label for="refills"> <span>Number of refills: </span>
+				</label> <input type="number" id="refills" th:field="*{refills}" />
+			</p>
+		</section>
+		<p>
+			<button type="submit">Create Prescription</button>
+		</p>
+	</form>
+</body>
+</html>

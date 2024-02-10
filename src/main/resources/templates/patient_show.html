@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link href="/display.css" rel="stylesheet">
+</head>
+<body>
+	<div th:object="${patient}">
+		<p>
+			<span th:text="${message}" ></span>
+		</p>
+		<section>
+			<table>
+				<tr>
+					<td>Patient ID:</td>
+					<td><span th:text="*{id}"></span></td>
+				</tr>
+				<tr>
+					<td>First Name:</td>
+					<td><span th:text="*{first_name}"></span></td>
+				</tr>
+				<tr>
+					<td>Last Name:</td>
+					<td><span th:text="*{last_name}"></span></td>
+				</tr>
+				<tr>
+					<td>Birthdate:</td>
+					<td><span th:text="*{birthdate}"></span></td>
+				</tr>
+				<tr>
+					<td>Street:</td>
+					<td><span th:text="*{street}"></span></td>
+				</tr>
+				<tr>
+					<td>City:</td>
+					<td><span th:text="*{city}"></span></td>
+				</tr>
+				<tr>
+					<td>State:</td>
+					<td><span th:text="*{state}"></span></td>
+				</tr>
+				<tr>
+					<td>Zipcode:</td>
+					<td><span th:text="*{zipcode}"></span></td>
+				</tr>
+				<tr>
+					<td>Primary Physican:</td>
+					<td><span th:text="*{primaryName}"></span></td>
+				</tr>
+
+			</table>
+		</section>
+		<p>
+			<a th:href="@{'/patient/edit/' + ${patient.id}}">Edit</a> | <a
+				href="/">Main Menu</a>
+		</p>
+	</div>
+</body>
+</html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link href="/display.css" rel="stylesheet">
+</head>
+<body>
+
+	<form  action="/doctor/get/" th:object="${doctor}" method="POST">
+		<section>
+			<h1>Enter doctor id and name</h1>
+			<p>
+				<span th:text="${message}"></span>
+			</p>
+			<p>
+				<label for="id"> <span>ID: </span>
+				</label> <input type="text" id="id" th:field="*{id}" />
+			</p>
+			<p>
+				<label for="last_name"> <span>Last Name: </span>
+				</label> <input type="text" id="last_name" th:field="*{last_name}" />
+			</p>
+
+			<p>
+				<button type="submit">Get Doctor Profile</button>
+			</p>
+		</section>
+	</form>
+
+</body>
+</html>

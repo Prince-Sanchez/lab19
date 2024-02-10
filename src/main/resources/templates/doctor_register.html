@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link href="/display.css" rel="stylesheet">
+</head>
+<body>
+	<section>
+		<form action="/doctor/register" th:object="${doctor}" method="POST">
+			<h1>Register as doctor</h1>
+			<p>
+				<span th:text="${message}"></span>
+			</p>
+			<section>
+				<p>
+					<label for="ssn"> <span>Your SSN: </span>
+					</label> <input type="text" id="ssn" th:field="*{ssn}" />
+				</p>
+				<p>
+					<label for="first_name"> <span>First Name: </span>
+					</label> <input type="text" id="first_name" th:field="*{first_name}" />
+				</p>
+				<p>
+					<label for="last_name"> <span>Last Name: </span>
+					</label> <input type="text" id="last_name" th:field="*{last_name}" />
+				</p>
+
+				<p>
+					<label for="specialty"> <span>Specialty: </span>
+					</label> <input type="text" id="specialty" th:field="*{specialty}" />
+				</p>
+				<p>
+					<label for="year"> <span>First Year in Practice: </span>
+					</label> <input type="text" id="yes" th:field="*{practice_since_year}" />
+				</p>
+			</section>
+			<p>
+				<button type="submit">Register</button>
+			</p>
+		</form>
+	</section>
+</body>
+</html>

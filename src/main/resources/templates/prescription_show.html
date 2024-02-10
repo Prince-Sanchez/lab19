@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="www.thymeleaf.org">
+<head>
+<link href="/display.css" rel="stylesheet">
+</head>
+<body>
+	<p>
+		<span th:text="${message}"></span>
+	</p>
+	<div th:object="${prescription}">
+		<table>
+			<tr>
+				<td>Rx:</td>
+				<td><span th:text="*{rxid}"></span></td>
+			</tr>
+			<tr>
+				<td>Doctor ID:</td>
+				<td><span th:text="*{doctor_id}"></span></td>
+			</tr>
+			<tr>
+				<td>First Name:</td>
+				<td><span th:text="*{doctorFirstName}"></span></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><span th:text="*{doctorLastName}"></span></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Patient ID:</td>
+				<td><span th:text="*{patient_id}"></span></td>
+			</tr>
+			<tr>
+				<td>First Name:</td>
+				<td><span th:text="*{patientFirstName}"></span></td>
+			</tr>
+			<tr>
+				<td>Last Name:</td>
+				<td><span th:text="*{patientLastName}"></span></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Drug:</td>
+				<td><span th:text="*{drugName}"></span></td>
+			</tr>
+			<tr>
+				<td>Quantity:</td>
+				<td><span th:text="*{quantity}"></span></td>
+			</tr>
+			<tr>
+				<td>Refills remaining:</td>
+				<td><span th:text="*{refills}"></span></td>
+			</tr>
+			<tr>
+				<td></td>
+				<td></td>
+			</tr>
+			<tr>
+				<td>Pharmacy ID:</td>
+				<td><span th:text="*{pharmacyID}"></span></td>
+			</tr>
+			<tr>
+				<td>Name:</td>
+				<td><span th:text="*{pharmacyName}"></span></td>
+			</tr>
+			<tr>
+				<td>Address:</td>
+				<td><span th:text="*{pharmacyAddress}"></span></td>
+			</tr>
+			<tr>
+				<td>Phone:</td>
+				<td><span th:text="*{pharmacyPhone}"></span></td>
+			</tr>
+			<tr>
+				<td>Date Filled:</td>
+				<td><span th:text="*{dateFilled}"></span></td>
+			</tr>
+			<tr>
+				<td>Cost: $</td>
+				<td><span th:text="*{cost}"></span></td>
+			</tr>
+		</table>
+
+		<p>
+			<a href="/">Main Menu</a>
+		</p>
+	</div>
+</body>
+</html>
