@@ -1,6 +1,7 @@
 package application;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.time.LocalDate;
 import java.util.Random;
@@ -32,33 +33,24 @@ public class ControllerPrescriptionCreate {
 	// process data entered on prescription_create form
 	@PostMapping("/prescription")
 	public String createPrescription(PrescriptionView p, Model model) {
+		try(Connection con = getConnection();){
+			String sql = "INSERT INTO Prescription (patient_id, doctor_id, rx_id, date) VALUES (?, ?, ?, CURDATE())";
+			try(PreparedStatement ps = con.prepareStatement(sql)){
+				ps.setInt(1, p.getPatient_id());
+				ps.setInt(2, p.getDoctor_id());
+				ps.setInt(3, p.getRxid());
 
-		System.out.println("createPrescription " + p);
-
-		/*
-		 * valid doctor name and id
-		 */
-		//TODO
-
-		/*
-		 * valid patient name and id
-		 */
-		//TODO
-
-		/*
-		 * valid drug name
-		 */
-		//TODO
-
-		/*
-		 * insert prescription  
-		 */
-		//TODO 
-		
-
-		model.addAttribute("message", "Prescription created.");
-		model.addAttribute("prescription", p);
-		return "prescription_show";
+				int result = ps.executeUpdate();
+				if (result > 0) {
+					model.addAttribute("message", "Prescription created successfully.");
+				} else {
+					model.addAttribute("message", "Failed to create prescription.");
+				}
+			}
+		} catch (SQLException e) {
+			model.addAttribute("message", "SQL Error: " + e.getMessage());
+		}
+		return "prescription_show"; //this redirects us to the appropriate view
 	}
 	
 	private Connection getConnection() throws SQLException {
