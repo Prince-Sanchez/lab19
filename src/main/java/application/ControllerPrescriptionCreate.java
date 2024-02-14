@@ -35,8 +35,8 @@ public class ControllerPrescriptionCreate {
 		System.out.println("createPrescription " + p);
 
 		try (Connection con = getConnection();){
-			String state = "insert into prescription (patient_id, doctor_id, drugName, quantity, patientFirstName," +
-					"patientLastName, doctorFirstName, doctorLastName, dateCreated) values(?,?,?,?,?,?,?,?,?) ";
+			String state = "insert into prescription (patient_id, doctor_id, drug_name, quantity, patientFirstName," +
+					"patientLastName, doctorFirstName, doctorLastName, dateCreated, num_refills) values(?,?,?,?,?,?,?,?,?,?) ";
 			PreparedStatement ps = con.prepareStatement(state, Statement.RETURN_GENERATED_KEYS);
 
 			PreparedStatement ps2 = con.prepareStatement("select * from patient where last_name =? and patient_id=?");// VALIDATE Patient FROM LAST NAME and ID
@@ -67,7 +67,7 @@ public class ControllerPrescriptionCreate {
 			}// END OF VALIDATE doctor
 			ps.setInt(2, p.getDoctor_id());
 
-			ps2 = con.prepareStatement("select * from drug where name=?");// VALIDATE drug FROM drug name
+			ps2 = con.prepareStatement("select * from drug where drug_name=?");// VALIDATE drug FROM drug name
 			ps2.setString(1, p.getDrugName());
 			rs2 = ps2.executeQuery();
 			if (rs2.next()){
@@ -81,10 +81,12 @@ public class ControllerPrescriptionCreate {
 			ps.setString(3, p.getDrugName());
 			ps.setInt(4, p.getQuantity());
 			ps.setString(5, p.getPatientFirstName());
-			ps.setString(6,p.getPatientFirstName());
+			ps.setString(6, p.getPatientLastName());
 			ps.setString(7, p.getDoctorFirstName());
 			ps.setString(8, p.getDoctorLastName());
 			ps.setString(9, LocalDate.now().toString());
+			ps.setInt(10, p.getRefills());
+
 
 			ps.executeUpdate(); // insert into table
 			ResultSet rs = ps.getGeneratedKeys();
@@ -99,12 +101,6 @@ public class ControllerPrescriptionCreate {
 			model.addAttribute("prescription", p);
 			return "prescription_create";
 		}
-
-		/*
-		 * insert prescription
-		 */
-		//TODO
-
 	}
 
 	private Connection getConnection() throws SQLException {

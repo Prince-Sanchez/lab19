@@ -60,15 +60,15 @@ public class ControllerPatientCreate {
 		 */
 		try (Connection con = getConnection();){
 			PreparedStatement ps = con.prepareStatement("insert into patient (last_name, first_name, " +
-							"birthdate, ssn, street, city, state, zipcode, primaryName) values(?,?,?,?,?,?,?,?,?)",
+							"birthdate, ssn, street, city, state, zip, primaryName) values(?,?,?,?,?,?,?,?,?)",
 					Statement.RETURN_GENERATED_KEYS);
 			ps.setString(1, p.getLast_name());
-			ps.setString(2,p.getFirst_name());
-			ps.setString(3,p.getBirthdate());
+			ps.setString(2, p.getFirst_name());
+			ps.setString(3, p.getBirthdate());
 			ps.setString(4, p.getSsn());
 			ps.setString(5, p.getStreet());
 			ps.setString(6, p.getCity());
-			ps.setString(7,p.getState());
+			ps.setString(7, p.getState());
 			ps.setString(8, p.getZipcode());
 			ps.setString(9, p.getPrimaryName());
 
@@ -107,7 +107,7 @@ public class ControllerPatientCreate {
 		int patientId = p.getId();
 		try (Connection con = getConnection();){ //find patient w last name and id
 			PreparedStatement ps = con.prepareStatement("select first_name, street, city," +
-					" state, zipcode, birthdate, primaryName from patient where last_name =? and patient_id=?"); // search using id and last name
+					" state, zip, birthdate, primaryName from patient where last_name =? and patient_id=?"); // search using id and last name
 			ps.setString(1, lastName);
 			ps.setInt(2, patientId);
 

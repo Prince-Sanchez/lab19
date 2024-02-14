@@ -36,7 +36,7 @@ public class ControllerPatientUpdate {
 		p.setId(id);
 		try (Connection con = getConnection();){
 
-			PreparedStatement ps = con.prepareStatement("select first_name, last_name, street, city, state, zipcode, birthdate, primaryName " +
+			PreparedStatement ps = con.prepareStatement("select first_name, last_name, street, city, state, zip, birthdate, primaryName " +
 					"from patient where patient_id=?");// search for patient by id
 			ps.setInt(1,id);
 
@@ -75,13 +75,12 @@ public class ControllerPatientUpdate {
 
 
 		try (Connection con = getConnection();){
-			PreparedStatement ps = con.prepareStatement("update patient set street=?, city=?,state=?, zipcode=?, primaryName=?");
-
-			PreparedStatement ps2 = con.prepareStatement("select id from doctor where last_name =?");// VALIDATE DOC FROM LAST NAME
+			PreparedStatement ps = con.prepareStatement("update patient set street=?, city=?,state=?, zip=?, primaryName=?, first_name=?, last_name=?, birthdate=? where patient_id=?");
+			PreparedStatement ps2 = con.prepareStatement("select id from doctor where last_name = ?");// VALIDATE DOC FROM LAST NAME
 			ps2.setString(1, p.getPrimaryName());
 			ResultSet rs = ps2.executeQuery();
 			if (rs.next()){
-				int docID = rs.getInt(1); // doctor confirmed if ID is found
+				rs.getInt(1); // doctor confirmed if ID is found
 			}
 			else {
 				model.addAttribute("message", "Doctor not found."); // error message if no doctor ID found
@@ -95,17 +94,19 @@ public class ControllerPatientUpdate {
 			ps.setString(3,p.getState());
 			ps.setString(4,p.getZipcode());
 			ps.setString(5, p.getPrimaryName());
+			ps.setString(6, p.getFirst_name());
+			ps.setString(7, p.getLast_name());
+			ps.setString(8, p.getBirthdate());
+			ps.setInt(9, p.getId());
 
 			//int rc = ps.executeUpdate();
-			int rc;
-
-			if((rc = ps.executeUpdate()) ==3){
+			int rowsAffected = ps.executeUpdate();
+			if(rowsAffected > 0){
 				model.addAttribute("message", "Update Successful");
 				model.addAttribute("patient", p);
 				return "patient_show";
 			} else{
 				model.addAttribute("message", "Error. Update was not successful");
-				System.out.println(rc);
 				model.addAttribute("patient", p);
 				return "patient_edit";
 			}
